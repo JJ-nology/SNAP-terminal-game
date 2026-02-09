@@ -39,4 +39,8 @@ public class CardGame {
     public void sortDeckInNumberOrder(){
         deckOfCards.sort(Comparator.comparingInt(card -> card.value));
     }
+//sort the deck by grouping suits together
+    public void sortDeckIntoSuits(){
+        deckOfCards.sort(Comparator.comparing(card -> card.suit));
+    }
 }

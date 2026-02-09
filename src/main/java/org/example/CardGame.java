@@ -23,11 +23,15 @@ public class CardGame {
             }
         }
     }
-
+//print out each card using its suit and symbol
     static void getDeck(){
         for (Card card : deckOfCards){
             System.out.println(card);
         }
 
+    }
+//deal a single card from the top of the deck
+    public void dealCard(){
+        System.out.println(deckOfCards.getFirst());
     }
 }

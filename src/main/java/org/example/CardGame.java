@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -43,4 +44,9 @@ public class CardGame {
     public void sortDeckIntoSuits(){
         deckOfCards.sort(Comparator.comparing(card -> card.suit));
     }
+//shuffle/ randomize the whole deck
+    public void shuffleDeck(){
+        Collections.shuffle(deckOfCards);
+    }
 }
+

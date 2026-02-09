@@ -16,7 +16,7 @@ public class CardGame {
     }
 
 //setup card deck and add cards to the new deck
-    private static void populateDeck(){
+    public static void populateDeck(){
         for (String suit: cardSuit){
             int count = 0;
             for(String symbol: cardSymbol){
@@ -49,4 +49,3 @@ public class CardGame {
         Collections.shuffle(deckOfCards);
     }
 }
-

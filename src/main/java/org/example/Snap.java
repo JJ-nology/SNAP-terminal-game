@@ -29,7 +29,10 @@ public class Snap extends CardGame{
             checkCardSymbols();
         }
     }
-
+// delete the card at the top of the deck
+    public void removeCard(){
+        deckOfCards.removeFirst();
+    }
 // welcome player to the game, give instructions, set up the game
     public Snap() {
         System.out.println("""
@@ -48,6 +51,7 @@ public class Snap extends CardGame{
             System.out.println("CONGRATULATIONS, YOU WIN");
         }else {
             previousCard = currentCard;
+            removeCard();
             System.out.println("Press ENTER to draw again");
             gameIsOn();
 

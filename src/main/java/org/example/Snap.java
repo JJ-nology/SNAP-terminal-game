@@ -22,6 +22,7 @@ public class Snap extends CardGame{
         currentCard = deckOfCards.getFirst();
         if(previousCard == null) {
             previousCard = currentCard;
+            removeCard();
             System.out.println("Press ENTER to draw the next card");
             gameIsOn();
 

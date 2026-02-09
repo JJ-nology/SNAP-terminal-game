@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CardGame {
@@ -33,5 +34,9 @@ public class CardGame {
 //deal a single card from the top of the deck
     public void dealCard(){
         System.out.println(deckOfCards.getFirst());
+    }
+//sort the deck by each card's value
+    public void sortDeckInNumberOrder(){
+        deckOfCards.sort(Comparator.comparingInt(card -> card.value));
     }
 }

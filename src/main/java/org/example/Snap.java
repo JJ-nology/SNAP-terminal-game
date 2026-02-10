@@ -2,6 +2,8 @@ package org.example;
 
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Snap extends CardGame{
@@ -31,12 +33,12 @@ public class Snap extends CardGame{
         shuffleDeck();
         System.out.println("Player 1 please enter a screen name: ");
         String player = scanner.nextLine().toLowerCase();
-        player1 = playerSetUp(player);
+        this.player1 = playerSetUp(player);
         System.out.println("Player 2 please enter a screen name: ");
         String anotherPlayer = scanner.nextLine().toLowerCase();
-        player2 = playerSetUp(anotherPlayer);
-        currentPlayer = player1;
-        System.out.printf( "%s press ENTER to begin.\n", currentPlayer.getName());
+        this.player2 = playerSetUp(anotherPlayer);
+        this.currentPlayer = this.player1;
+        System.out.printf( "%s press ENTER to begin.\n", this.currentPlayer.getName());
     }
 
 // run the game - While the player hasn't won, keep drawing cards
@@ -49,7 +51,7 @@ public class Snap extends CardGame{
             previousCard = currentCard;
             removeCard();
             togglePlayer();
-            System.out.printf("%s ,press ENTER to draw the next card", currentPlayer.getName());
+            System.out.printf("%s ,press ENTER to draw the next card", this.currentPlayer.getName());
             gameIsOn();
 
         }else {
@@ -61,8 +63,8 @@ public class Snap extends CardGame{
     private Player playerSetUp(String playerName){
         if (playerName.isEmpty()) {
             System.out.println("Sorry, that name is invalid. Please try again");
-            String name = scanner.nextLine().toLowerCase();
-            playerSetUp(name);
+            playerName = scanner.nextLine().toLowerCase();
+            playerSetUp(playerName);
 
         }
         return new Player(playerName);
@@ -70,10 +72,10 @@ public class Snap extends CardGame{
 
 // set up player toggle
     private void togglePlayer(){
-        if (player1.getName().equals(currentPlayer.getName())) {
-            currentPlayer = player2;
+        if (this.player1.getName().equals(this.currentPlayer.getName())) {
+            this.currentPlayer = this.player2;
         } else {
-            currentPlayer = player1;
+            this.currentPlayer = this.player1;
         }
 
     }
@@ -86,14 +88,30 @@ public class Snap extends CardGame{
     // check if current and previous cards has the same symbol. Continue game or display winner
     public void checkCardSymbols() {
         if (Objects.equals(currentCard.symbol, previousCard.symbol)) {
-            System.out.println("CONGRATULATIONS, " + currentPlayer.getName() + " YOU WIN");
-        }else {
+            System.out.println(this.currentPlayer.getName() + " type snap within 3 seconds to win");
+            String typeSnap = scanner.nextLine();
+            //3-second timer to type snap and secure win
+            Timer timer = new Timer();
+
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    togglePlayer();
+                    System.out.println("Sorry, you were too slow. \n.CONGRATULATIONS " + currentPlayer.getName() + " wins  !!");
+                }
+            }, 3000);
+
+            if(Objects.equals(typeSnap.toLowerCase(), "snap")){
+                timer.cancel();
+                System.out.println("WELL DONE " + this.currentPlayer.getName() + " you are the winner!!");
+            }
+
+        } else {
             previousCard = currentCard;
             removeCard();
             togglePlayer();
-            System.out.println(currentPlayer.getName() + " ,press ENTER to draw the next card");
+            System.out.println(this.currentPlayer.getName() + " ,press ENTER to draw the next card");
             gameIsOn();
-
         }
     }
 }

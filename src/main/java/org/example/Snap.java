@@ -65,7 +65,6 @@ public class Snap extends CardGame{
             System.out.println("Sorry, that name is invalid. Please try again");
             playerName = scanner.nextLine().toLowerCase();
             playerSetUp(playerName);
-
         }
         return new Player(playerName);
     }
@@ -82,6 +81,11 @@ public class Snap extends CardGame{
 
 // delete the card at the top of the deck
     public void removeCard(){
+        if(deckOfCards.isEmpty()){
+            populateDeck();
+            shuffleDeck();
+            removeCard();
+        }
         deckOfCards.removeFirst();
     }
 
@@ -97,7 +101,7 @@ public class Snap extends CardGame{
                 @Override
                 public void run() {
                     togglePlayer();
-                    System.out.println("Sorry, you were too slow. \n.CONGRATULATIONS " + currentPlayer.getName() + " wins  !!");
+                    System.out.println("Sorry, you were too slow. \n\nCONGRATULATIONS " + currentPlayer.getName() + " wins  !!");
                 }
             }, 3000);
 

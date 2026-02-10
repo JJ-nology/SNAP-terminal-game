@@ -7,12 +7,33 @@ import java.util.Scanner;
 public class Snap extends CardGame{
     protected Card currentCard;
     protected Card previousCard;
+    protected Player player1;
+    protected Player player2;
+    protected Player currentPlayer;
     Scanner scanner = new Scanner(System.in);
 
 // initial game set up
     private void setUpGame(){
         populateDeck();
         shuffleDeck();
+        System.out.println("Player 1 please enter a screen name: ");
+        String player = scanner.nextLine().toLowerCase();
+        player1 = playerSetUp(player);
+        System.out.println("Player 2 please enter a screen name: ");
+        String anotherPlayer = scanner.nextLine().toLowerCase();
+        player2 = playerSetUp(anotherPlayer);
+        currentPlayer = player1;
+        System.out.printf( "%s press ENTER to begin.\n", currentPlayer.getName());
+    }
+// set up player
+    private Player playerSetUp(String playerName){
+        if (playerName.isEmpty()) {
+            System.out.println("Sorry, that name is invalid. Please try again");
+            String name = scanner.nextLine().toLowerCase();
+            playerSetUp(name);
+
+        }
+        return new Player(playerName);
     }
 // run the game - While the player hasn't won, keep drawing cards
     public void gameIsOn(){
@@ -40,7 +61,7 @@ public class Snap extends CardGame{
                 Welcome to SNAP!!\s
                 All you need to win the game is to draw 2 cards\s
                 in a row that have the same symbol i.e. 2 Jacks\s
-                Press ENTER when it's your turn.""");
+                This is a 2 player game so press ENTER when it's your turn.""");
 
         setUpGame();
         gameIsOn();

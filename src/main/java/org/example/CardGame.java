@@ -34,7 +34,8 @@ public class CardGame {
     }
 //deal a single card from the top of the deck
     public void dealCard(){
-        System.out.println(deckOfCards.getFirst());
+        System.out.println(deckOfCards.getFirst() + "\n");
+
     }
 //sort the deck by each card's value
     public void sortDeckInNumberOrder(){
